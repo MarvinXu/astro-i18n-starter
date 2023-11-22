@@ -1,7 +1,6 @@
 import { resources } from "@/locales/util";
 import i18next, { type Resource } from "i18next";
 import { getLocale, getLocaleUrl } from "astro-i18n-aut";
-import type { AstroGlobal } from "astro";
 import { defineMiddleware } from "astro/middleware";
 
 i18next.init({
@@ -27,7 +26,8 @@ export const i18nextMiddleware = defineMiddleware((context, next) => {
   // filter `/_image` requests
   if (pathname.startsWith("/_")) {
     return next();
-  } else {
+  }
+  else {
     const lang = getLocale(pathname);
     i18next.changeLanguage(lang);
   }
