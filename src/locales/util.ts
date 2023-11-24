@@ -1,5 +1,6 @@
 function loadResources() {
-  const modules: Record<string, { default: unknown }> = import.meta.glob("./*/*.json", { eager: true });
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const modules = import.meta.glob("./*/*.json", { eager: true }) as Record<string, { default: unknown }>;
   const resources: Record<string, unknown> = {};
   for (const [path, module] of Object.entries(modules)) {
     const [, lang, file] = path.split("/");

@@ -3,7 +3,7 @@ import i18next, { type Resource } from "i18next";
 import { getLocale, getLocaleUrl } from "astro-i18n-aut";
 import { defineMiddleware } from "astro/middleware";
 
-i18next.init({
+await i18next.init({
   resources: resources as Resource,
   defaultNS: "common",
   fallbackLng: "en",
@@ -21,7 +21,7 @@ export const t = i18next.t;
 //   i18next.changeLanguage(lang);
 // }
 
-export const i18nextMiddleware = defineMiddleware((context, next) => {
+export const i18nextMiddleware = defineMiddleware(async (context, next) => {
   const { pathname } = new URL(context.request.url);
   // filter `/_image` requests
   if (pathname.startsWith("/_")) {
@@ -29,7 +29,7 @@ export const i18nextMiddleware = defineMiddleware((context, next) => {
   }
   else {
     const lang = getLocale(pathname);
-    i18next.changeLanguage(lang);
+    await i18next.changeLanguage(lang);
   }
   return next();
 });

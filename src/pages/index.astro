@@ -1,11 +1,13 @@
 ---
 import { r, t } from "@/utils/i18n";
 import Layout from "../layouts/Layout.astro";
-const foo = "hello";
+const foo:String = "hello";
+const func:any = 1
+func()
 ---
 
 <Layout title="Welcome to Astro.">
   <a href={r("/")}>Index</a>
   {t("hello")}
-  <p set:html={foo} />
+  <p set:html={foo}>1</p>
 </Layout>
